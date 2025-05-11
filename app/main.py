@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI
 from dotenv import dotenv_values
+from app.api.main import api_router
 from app.core.config import settings
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
@@ -36,3 +37,6 @@ def read_root() -> dict:
         "version": "1.0",
         "info": "Check the /docs routes",
     }
+
+
+app.include_router(api_router)
