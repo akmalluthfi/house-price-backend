@@ -7,6 +7,11 @@ router = APIRouter(prefix="/locations", tags=["locations"])
 
 
 @router.get("/", response_model=list[Location])
-def index(session: SessionDep) -> list[Location]:
-    results = session.exec(select(Location)).all()
+def index(session: SessionDep, q: str | None = None) -> list[Location]:
+    query = select(Location)
+
+    if q:
+        query = query.where(Location.district.ilike(f"%{q}%"))
+
+    results = session.exec(query).all()
     return results

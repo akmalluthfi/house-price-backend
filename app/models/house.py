@@ -16,7 +16,6 @@ class House(SQLModel, table=True):
     bathroom: int
     land_area: int
     building_area: int
-    carport: int
 
     location_id: int = Field(foreign_key="locations.id")
     location: Optional["Location"] = Relationship(back_populates="houses")
