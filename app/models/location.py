@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 from sqlmodel import Field, SQLModel, Relationship
+from pydantic import BaseModel
 
 if TYPE_CHECKING:
     from .house import House
@@ -12,3 +13,8 @@ class Location(SQLModel, table=True):
     district: str
 
     houses: list["House"] = Relationship(back_populates="location")
+
+
+class LocationResponse(BaseModel):
+    id: int | None = None
+    district: str
