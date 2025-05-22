@@ -36,7 +36,7 @@ class HouseRequest(BaseModel):
     bathroom: int = ModelField(ge=0)
     land_area: int = ModelField(ge=15)
     building_area: int = ModelField(ge=15)
-    location_id: int | float = ModelField(ge=0, serialization_alias="location")
+    location_id: int | str = ModelField(ge=0, serialization_alias="location")
 
 
 class HouseResponse(BaseModel):

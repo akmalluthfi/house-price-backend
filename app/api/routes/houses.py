@@ -4,7 +4,7 @@ from app.models.house import House, PaginatedHouseResponse, HouseRequest, HouseR
 from app.models.location import Location
 from sqlmodel import select
 from sqlalchemy import func
-from app.core.model_loader import model, enc, scaler
+from app.core.model_loader import model_pipeline
 
 
 router = APIRouter(prefix="/houses", tags=["houses"])
@@ -12,7 +12,7 @@ router = APIRouter(prefix="/houses", tags=["houses"])
 
 @router.get("/", response_model=PaginatedHouseResponse)
 def index(session: SessionDep, page: int = 1) -> PaginatedHouseResponse:
-    limit = 10
+    limit = 15
     offset = (page - 1) * limit
 
     query = select(House).offset(offset).limit(limit)
@@ -35,12 +35,10 @@ def index(session: SessionDep, page: int = 1) -> PaginatedHouseResponse:
 @router.post("/predict", response_model=HouseResponse)
 def index(request: HouseRequest, session: SessionDep) -> HouseResponse:
     location = session.get(Location, request.location_id)
-    request.location_id = enc[location.district]
+    request.location_id = location.district
 
-    features = [list(request.model_dump(by_alias=True).values())]
-    X_scaled = scaler.transform(features)
-
-    pred = model.predict(X_scaled)
+    features = [request.model_dump(by_alias=True)]
+    pred = model_pipeline.predict(features)
 
     return HouseResponse(
         **request.model_dump(exclude=["location_id"]),
