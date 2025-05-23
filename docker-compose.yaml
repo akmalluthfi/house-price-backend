@@ -1,0 +1,27 @@
+services:
+  app-api:
+    depends_on:
+      - app-db
+    # image: house-api
+    build: .
+    container_name: house-api
+    restart: unless-stopped
+    # Expose port ke host 8000, tidak perlu jika 
+    ports:
+      - "8000:80"
+    env_file:
+      - .env
+
+  app-db:
+    image: postgres:17-bookworm
+    container_name: house-data
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rumah123
+    volumes:
+      - house-data:/var/lib/postgresql/data
+
+volumes:
+  house-data:
