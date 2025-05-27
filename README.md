@@ -1,4 +1,3 @@
-
 # House Price Prediction
 
 This is a house price prediction project developed as part of a project-based learning assignment for the Web Service Technology and Machine Learning Ops course.
@@ -14,8 +13,8 @@ This project is split across three repositories:
 - 🚀 **Backend API (FastAPI)** — [house-price-backend](https://github.com/akmalluthfi/house-price-backend)  
   Hosts the trained model using FastAPI and exposes REST endpoints for prediction services.
 
-- 🖥️ **Frontend Interface (Vue)** — [house-price-frontend](https://github.com/fawzan745/house-price-frontend)  
-  Provides a simple and interactive Vue-based web interface for users to input data and view predictions.
+- 🖥️ **Frontend Interface (React)** — [house-price-frontend](https://github.com/fawzan745/house-price-frontend-react)  
+  Provides a simple and interactive React-based web interface for users to input data and view predictions.
 
 ## Authors
 
@@ -26,7 +25,7 @@ This project is split across three repositories:
 
 ## Tech Stack
 
-**Client:** VueJS, TailwindCSS, DaisyUI
+**Client:** ReactJS, TailwindCSS, Shadcn, Tailark
 
 **Server:** FastAPI, SQLModel, Alembic
 
@@ -72,6 +71,20 @@ Start the app
   fastapi dev app/main.py
 ```
 
+## Deployment
+To build and run using Docker
+
+```bash
+  docker compose up -d
+  docker compose down
+```
+
+Run migrations and seeders
+
+```bash
+  docker compose exec app-api alembic upgrade head
+  docker compose exec app-api python -m database.seeders.main
+```
 
 ## Documentation
 
