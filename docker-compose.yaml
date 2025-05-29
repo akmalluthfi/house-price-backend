@@ -2,15 +2,16 @@ services:
   app-api:
     depends_on:
       - app-db
-    # image: house-api
+    image: house-price-api
     build: .
     container_name: house-api
     restart: unless-stopped
-    # Expose port ke host 8000, tidak perlu jika 
     ports:
       - "8000:80"
     env_file:
       - .env
+    networks:
+      - house-network
 
   app-db:
     image: postgres:17-bookworm
@@ -22,6 +23,11 @@ services:
       - POSTGRES_DB=rumah123
     volumes:
       - house-data:/var/lib/postgresql/data
+    networks:
+      - house-network
 
 volumes:
   house-data:
+
+networks:
+  house-network:
