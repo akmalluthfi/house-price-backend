@@ -9,6 +9,8 @@ anyio==4.9.0
     #   httpx
     #   starlette
     #   watchfiles
+category-encoders==2.8.1
+    # via house-price-backend (pyproject.toml)
 certifi==2025.4.26
     # via
     #   httpcore
@@ -72,9 +74,23 @@ mdurl==0.1.2
     # via markdown-it-py
 numpy==2.2.6
     # via
+    #   category-encoders
+    #   pandas
+    #   patsy
     #   scikit-learn
     #   scipy
+    #   statsmodels
     #   xgboost-cpu
+packaging==25.0
+    # via statsmodels
+pandas==2.3.3
+    # via
+    #   category-encoders
+    #   statsmodels
+patsy==1.0.1
+    # via
+    #   category-encoders
+    #   statsmodels
 psycopg==3.2.10
     # via house-price-backend (pyproject.toml)
 psycopg-binary==3.2.10
@@ -91,12 +107,16 @@ pydantic-settings==2.11.0
     # via house-price-backend (pyproject.toml)
 pygments==2.19.1
     # via rich
+python-dateutil==2.9.0.post0
+    # via pandas
 python-dotenv==1.1.0
     # via
     #   pydantic-settings
     #   uvicorn
 python-multipart==0.0.20
     # via fastapi
+pytz==2025.2
+    # via pandas
 pyyaml==6.0.2
     # via uvicorn
 rich==14.0.0
@@ -110,15 +130,21 @@ rich-toolkit==0.15.1
 rignore==0.7.0
     # via fastapi-cloud-cli
 scikit-learn==1.7.2
-    # via house-price-backend (pyproject.toml)
+    # via
+    #   house-price-backend (pyproject.toml)
+    #   category-encoders
 scipy==1.15.3
     # via
+    #   category-encoders
     #   scikit-learn
+    #   statsmodels
     #   xgboost-cpu
 sentry-sdk==2.39.0
     # via fastapi-cloud-cli
 shellingham==1.5.4
     # via typer
+six==1.17.0
+    # via python-dateutil
 sniffio==1.3.1
     # via anyio
 sqlalchemy==2.0.41
@@ -129,6 +155,8 @@ sqlmodel==0.0.25
     # via house-price-backend (pyproject.toml)
 starlette==0.46.2
     # via fastapi
+statsmodels==0.14.5
+    # via category-encoders
 threadpoolctl==3.6.0
     # via scikit-learn
 typer==0.15.4
@@ -152,7 +180,9 @@ typing-inspection==0.4.1
     #   pydantic
     #   pydantic-settings
 tzdata==2025.2
-    # via psycopg
+    # via
+    #   pandas
+    #   psycopg
 urllib3==2.5.0
     # via sentry-sdk
 uvicorn==0.34.2
