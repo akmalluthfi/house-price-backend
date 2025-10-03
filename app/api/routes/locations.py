@@ -6,7 +6,7 @@ from sqlmodel import select
 router = APIRouter(prefix="/locations", tags=["locations"])
 
 
-@router.get("/", response_model=list[LocationResponse])
+@router.get("", response_model=list[LocationResponse])
 def index(
     session: SessionDep, q: str | None = None, limit: int = 10
 ) -> list[LocationResponse]:

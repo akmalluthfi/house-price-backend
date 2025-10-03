@@ -10,7 +10,7 @@ from app.core.model_loader import model_pipeline
 router = APIRouter(prefix="/houses", tags=["houses"])
 
 
-@router.get("/", response_model=PaginatedHouseResponse)
+@router.get("", response_model=PaginatedHouseResponse)
 def index(session: SessionDep, page: int = 1) -> PaginatedHouseResponse:
     limit = 15
     offset = (page - 1) * limit
@@ -43,5 +43,5 @@ def predict(request: HouseRequest, session: SessionDep) -> HouseResponse:
     return HouseResponse(
         **request.model_dump(exclude=["location_id"]),
         location=location.model_dump(),
-        price=pred[0]
+        price=pred[0],
     )
