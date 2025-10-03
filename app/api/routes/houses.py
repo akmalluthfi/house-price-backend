@@ -33,7 +33,7 @@ def index(session: SessionDep, page: int = 1) -> PaginatedHouseResponse:
 
 
 @router.post("/predict", response_model=HouseResponse)
-def index(request: HouseRequest, session: SessionDep) -> HouseResponse:
+def predict(request: HouseRequest, session: SessionDep) -> HouseResponse:
     location = session.get(Location, request.location_id)
     request.location_id = location.district
 
